@@ -18,6 +18,11 @@ public class UnorderedSingleLinkedList<T> extends AbstractSingleLinkedList<T>
 
 	@Override
 	public void addFirst(T element) {
+		if(first == null) {
+			first = new Node<T>(element);
+			return;
+		}
+		
 		Node<T> n = new Node<T>(element);
 		n.next = first;
 		first = n;
@@ -26,6 +31,10 @@ public class UnorderedSingleLinkedList<T> extends AbstractSingleLinkedList<T>
 
 	@Override
 	public void addLast(T element) {
+		if(first == null) {
+			first = new Node<T>(element);
+			return;
+		}
 
 		addLast(element, first);
 	}
@@ -34,7 +43,7 @@ public class UnorderedSingleLinkedList<T> extends AbstractSingleLinkedList<T>
 		if(node.next == null) {
 			node.next = new Node<T>(element);
 		} else {
-			addLast(element,node.next);
+			addLast(element, node.next);
 		}
 	}
 
