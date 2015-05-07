@@ -44,8 +44,15 @@ public class OrderedSingleLinkedList<T extends Comparable<? super T>> extends Ab
 	@Override
 	public void removeDuplicates() {
 		// Implementar la operación eliminar duplicados consiguiendo una complejidad O(n)
-		
-		
+		if(first == null) {
+			return;
+		}
+		Node<T> r = first;
+		while(r.next != null) {
+			if(r.element.equals(r.next.element)) {
+				r.next = r.next.next;
+			}
+			r  = r.next;
+		}
 	}
-	
 }
