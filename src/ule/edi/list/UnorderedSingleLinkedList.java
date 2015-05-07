@@ -50,11 +50,25 @@ public class UnorderedSingleLinkedList<T> extends AbstractSingleLinkedList<T>
 	// TODO ejercicio
 	@Override
 	public T replaceAt(int n, T element) {
-
-		return null;
+		if(n <= 0) {
+			throw new NoSuchElementException("indice invalido");
+		}
+		return replaceAt(n, element, first);
 	}
-
-	@Override
+	
+	private T replaceAt(int n, T element, Node<T> node) {
+		if(node == null) {
+			throw new NoSuchElementException("no se puede remplazar el elemento");
+		}
+		if(n <= 1) {
+			T aux = node.element;
+			node.element = element;
+			return aux;
+		} else {
+			return replaceAt(n - 1, element, node.next);
+		}
+	}
+	@Override 
 	public void insertBefore(int n, T element) throws NoSuchElementException {
 		// TODO 
 		
