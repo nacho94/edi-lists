@@ -31,7 +31,7 @@ public class UnorderedSingleLinkedList<T> extends AbstractSingleLinkedList<T>
 
 	@Override
 	public void addLast(T element) {
-		if(first == null) {
+		if(isEmpty()) {
 			first = new Node<T>(element);
 			return;
 		}
@@ -68,10 +68,31 @@ public class UnorderedSingleLinkedList<T> extends AbstractSingleLinkedList<T>
 			return replaceAt(n - 1, element, node.next);
 		}
 	}
+	
 	@Override 
 	public void insertBefore(int n, T element) throws NoSuchElementException {
-		// TODO 
-		
+		if(n <= 0) {
+			throw new NoSuchElementException("indice invalido");
+		}
+		if(isEmpty()) {
+			addLast(element);
+			return;
+		}
+		insertBefore(n, element, first);
+	}
+	
+	private void insertBefore(int n, T element, Node<T> node) {
+		if(node.next == null) {
+			node.next = new Node<T>(element);
+			return;
+		}
+		if(n <= 2) {
+			Node<T> aux = node.next;
+			node.next = new Node<T>(element);
+			node.next.next = aux;
+		} else {
+			insertBefore(n - 1 , element, node.next);
+		}
 	}
 
 
