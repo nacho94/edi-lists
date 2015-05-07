@@ -15,8 +15,30 @@ public class OrderedSingleLinkedList<T extends Comparable<? super T>> extends Ab
 	
 	@Override
 	public void add(T element) {
-		
-		
+		if(isEmpty()) {
+			first = new Node<T>(element);
+			return;
+		}
+		add(element,first,null);
+	}
+	
+	private void add(T element,Node<T> node, Node<T> prev) {
+		if(node.next == null) {
+			node.next = new Node<T>(element);
+			return;
+		}
+		if(element.compareTo(node.element) > 0) {
+			add(element, node.next, node);
+		}else {
+			if(prev == null) {
+				first = new Node<T>(element);
+				first.next = node;
+			} else {
+				prev.next = new Node<T>(element);
+				prev.next.next = node;
+			}
+			
+		}
 	}
 
 	@Override
