@@ -178,20 +178,59 @@ public class AbstractSingleLinkedList<T> extends AbstractList<T> {
 	////////////////////////// TODO RECURSIVE
 	// Devuelve el último nodo de la lista, o <code>null</code>.
 	protected Node<T> last() {
-     // todo
-		return null;
+     // todoi
+		if(first == null) {
+			return null;
+		}
+		return last(first);
 	}
-
+	
+	private Node<T> last(Node<T> node) {
+		if(node.next == null) {
+			return node;
+		}else {
+			return last(node.next);
+		}
+	}
 	@Override
 	public int size() {
-     //todo
-		return 0;
+		if(first == null) {
+			return 0;
+		}
+		return size(1,first);
 	}
+	
+	public int size(int n,Node<T> node) {
+	     if(node.next != null) {
+	    	 return size(n+1,node.next);
+	     }else {
+	    	 return n;
+	     }
+			
+		}
 
 	@Override
 	public void removeDuplicates() {
       // implementación de eliminar duplicados para listas no ordenadas (funcionaría tambien si la lista está ordenada) Complejidad O(n2)
+		if(first == null) {
+			return;
 		}
+		Node<T> r = first;
+		Node<T> node = first.next;
+		
+		while(r.next != null) {
+			while(node.next != null) {
+				if(r.element.equals(node.element)) {
+					Node<T> aux = previous(node);
+					aux.next = node.next;
+					node = node.next;
+				} else {
+					node = node.next;
+				}
+			}
+			r = r.next;
+		}
+	}
 	
 	
 	
@@ -228,7 +267,5 @@ public class AbstractSingleLinkedList<T> extends AbstractList<T> {
 			throw new UnsupportedOperationException();
 		}
 	}
-
-	
 
 }
