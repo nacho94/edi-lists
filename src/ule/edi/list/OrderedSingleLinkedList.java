@@ -6,6 +6,7 @@ public class OrderedSingleLinkedList<T extends Comparable<? super T>> extends Ab
 		//	Vacía
 	}
 	
+	@SuppressWarnings("unchecked")
 	public OrderedSingleLinkedList(T ... v) {
 		//	Añade todos los elementos del array 'v'
 		for (T Vi : v) {
@@ -48,11 +49,37 @@ public class OrderedSingleLinkedList<T extends Comparable<? super T>> extends Ab
 			return;
 		}
 		Node<T> r = first;
-		while(r.next != null) {
+		while(r != null) {
 			if(r.element.equals(r.next.element)) {
-				r.next = r.next.next;
+				if(r.next == null) {
+					r.next = null;
+					return;
+				}else{
+					r.next = r.next.next;
+				}
+				
 			}
 			r  = r.next;
 		}
+	}
+	
+	public static void main(String []args) {  	
+        OrderedSingleLinkedList<String> t = new OrderedSingleLinkedList<>();
+
+        t.add("A1");
+        t.add("A2");
+        t.add("B");
+        t.add("B");
+        t.add("C1");
+        t.add("E");
+        t.add("E");
+        t.add("E");
+        t.add("E");
+        
+        System.out.println(t.toString());
+        System.out.println(t.last().element);
+        System.out.println(t.size());
+        t.removeDuplicates();  	
+        System.out.println(t.toString());
 	}
 }
