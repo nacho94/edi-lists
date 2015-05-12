@@ -9,6 +9,7 @@ public class UnorderedSingleLinkedList<T> extends AbstractSingleLinkedList<T>
 		// Vacía
 	}
 
+	@SuppressWarnings("unchecked")
 	public UnorderedSingleLinkedList(T... v) {
 		// Añadir en el mismo orden que en 'v'
 		for (T Vi : v) {
