@@ -76,7 +76,7 @@ public class UnorderedSingleLinkedList<T> extends AbstractSingleLinkedList<T>
 			throw new NoSuchElementException("indice invalido");
 		}
 		if(isEmpty()) {
-			addLast(element);
+			addFirst(element);
 			return;
 		}
 		insertBefore(n, element, first);
@@ -86,6 +86,8 @@ public class UnorderedSingleLinkedList<T> extends AbstractSingleLinkedList<T>
 		if(node.next == null) {
 			node.next = new Node<T>(element);
 			return;
+		}if(n == 1) {
+			addFirst(element);
 		}
 		if(n <= 2) {
 			Node<T> aux = node.next;
@@ -95,7 +97,4 @@ public class UnorderedSingleLinkedList<T> extends AbstractSingleLinkedList<T>
 			insertBefore(n - 1 , element, node.next);
 		}
 	}
-
-
-
 }

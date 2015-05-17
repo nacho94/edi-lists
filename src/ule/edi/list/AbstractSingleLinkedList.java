@@ -212,16 +212,20 @@ public class AbstractSingleLinkedList<T> extends AbstractList<T> {
 	@Override
 	public void removeDuplicates() {
       // implementación de eliminar duplicados para listas no ordenadas (funcionaría tambien si la lista está ordenada) Complejidad O(n2)
-		if(first == null) {
+	if(first == null) {
 			return;
 		}
 		Node<T> r = first;
 		Node<T> node = first.next;
 		
 		while(r.next != null) {
-			while(node.next != null) {
+			while(node != null) {
 				if(r.element.equals(node.element)) {
 					Node<T> aux = previous(node);
+					if(node.next == null) {
+						aux.next = null;
+						return;
+					}
 					aux.next = node.next;
 					node = node.next;
 				} else {
@@ -229,6 +233,7 @@ public class AbstractSingleLinkedList<T> extends AbstractList<T> {
 				}
 			}
 			r = r.next;
+			node = r.next;
 		}
 	}
 	
