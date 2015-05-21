@@ -88,6 +88,7 @@ public class UnorderedSingleLinkedList<T> extends AbstractSingleLinkedList<T>
 			return;
 		}if(n == 1) {
 			addFirst(element);
+			return;
 		}
 		if(n <= 2) {
 			Node<T> aux = node.next;

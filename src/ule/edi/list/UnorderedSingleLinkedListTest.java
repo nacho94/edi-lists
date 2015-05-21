@@ -2,11 +2,14 @@ package ule.edi.list;
 
 import static org.junit.Assert.*;
 
+import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.Assert;
+
+import ule.edi.list.AbstractSingleLinkedList.Node;
 
 public class UnorderedSingleLinkedListTest {
 	UnorderedSingleLinkedList<String> lista;
@@ -121,4 +124,88 @@ public class UnorderedSingleLinkedListTest {
 		lista.insertBefore(2, "er");
 		Assert.assertEquals("[element, er]",lista.toString());
 	}
+	
+	@Test
+	public void testInsertBeforeIntT6() {
+		lista.addLast("element");
+		
+		lista.insertBefore(lista.first ,new Node<String>("element"));
+		Assert.assertEquals("[element, element]",lista.toString());
+	}
+	
+	@Test
+	public void testInsertBeforeIntT7() {
+		lista.addLast("element");
+		
+		lista.insertBefore(lista.first.next ,new Node<String>("element"));
+		Assert.assertEquals("[element, element]",lista.toString());
+	}
+	
+	@Test
+	public void testRemoveDuplicates() {
+		lista.addLast("element");
+		lista.addLast("a");
+		lista.addLast("w");
+		lista.addLast("element");
+		lista.removeDuplicates();
+		Assert.assertEquals("[element, a, w]",lista.toString());
+	}
+	
+	@Test
+	public void testRemoveDuplicates2() {
+		lista.addLast("element");
+		lista.removeDuplicates();
+		Assert.assertEquals("[element]",lista.toString());
+	}
+	
+	@Test
+	public void testRemoveDuplicates3() {
+		lista.removeDuplicates();
+		Assert.assertEquals("[]",lista.toString());
+	}
+	
+	@Test
+	public void testRemoveDuplicates4() {
+		lista.addLast("element");
+		lista.addLast("element");
+		lista.addLast("a");
+		lista.addLast("w");
+		lista.removeDuplicates();
+		Assert.assertEquals("[element, a, w]",lista.toString());
+	}
+	
+	@Test
+	public void testLast() {
+		lista.last();
+	}
+	
+	@Test
+	public void testLast2() {
+		lista.addLast("element");
+		lista.last();
+	}
+
+	@Test
+	public void testToStringNode() {
+		lista.addLast("element");
+		Assert.assertEquals("(element)",lista.first.toString());
+	}
+	
+	@Test
+	public void testSize() {
+		lista.addLast("element");
+		Assert.assertEquals(1,lista.size());
+	}
+	
+	@Test
+	public void testSize2() {
+		Assert.assertEquals(0,lista.size());
+	}
+	
+	@Test(expected=UnsupportedOperationException.class)
+	public void testRemoveIterator() {
+		Iterator<String> t = lista.iterator();
+		t.remove();
+	}
+	
 }
